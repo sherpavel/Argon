@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * <br>
  * {@link Variable} is an intermediary between the UI and code. Interaction is done through the UI side panel, where the variables are added sequentially ({@link #addVariables(Variable[])}).
  * <br>
- * {@link Clock} is a use-created and Argon-managed loop function. Each can run at different updaterates (frequencies) from the viewport’s renderer. Clock manager prioritizes completing function calls over realtime rendering. Thus frequencies can be thought of as target updaterates and are relative to each other.
+ * {@link Clock} is a use-created and Argon-managed loop function. Each can run at different updaterates (frequencies) from the viewport’s renderer. Clock manager prioritizes completing function calls over realtime rendering. Therefore, frequencies can be thought of as target updaterates and are relative to each other.
  * <br>
  * Argon has frame-by-frame recording functionality. To learn more, see {@link #setupRecorder(int, int, int, String)}.
  * @see Layer
@@ -140,7 +140,7 @@ public class Argon {
      * Adds {@link Clock}.
      * Clock is a user-defined function that runs at specific updaterate (frequency) per second.
      * This value is handled as a target and highly depends on the user's clock function.
-     * Thus it is possible for the entire call loop to take longer then desired time.
+     * Therefore, it is possible for the entire call loop to take longer then desired time.
      * @param clockName clock's name to be displayed in the UI panel
      * @param clock {@link Clock}
      * @param frequency frequency or updates per second of the function
@@ -156,7 +156,7 @@ public class Argon {
      * Adds {@link Clock}.
      * Clock is a user-defined function that runs at specific updaterate (frequency) per second.
      * This value is handled as a target and highly depends on the user's clock function.
-     * Thus it is possible for the entire call loop to take longer then desired time.
+     * Therefore, it is possible for the entire call loop to take longer then desired time.
      * @param clock {@link Clock}
      * @param frequency frequency or updates per second of the function
      * @see Clock

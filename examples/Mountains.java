@@ -36,7 +36,7 @@ public class Mountains {
         IntVar lineCount = new IntVar("Line count", 20, 10, 200);
         DoubleVar maxAmp = new DoubleVar("Max amplitude(% of height)", 1, 0.01, 2);
         IntVar octaves = new IntVar("Noise octaves", 8, 2, 16);
-        argon.addVariables(lineCount, noiseScale, maxAmp, octaves, octaves, octaves);
+        argon.addVariables(lineCount, noiseScale, maxAmp, octaves);
 
         // Cyclical time to loop the animation
         // Here - 10 seconds cycle

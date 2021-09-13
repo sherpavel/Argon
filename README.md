@@ -1,4 +1,4 @@
-#![](src/sher/argon/core/window/resources/icon64.png) Argon
+![Argon](images/logo.png)
 
 ### Table of contents
 - [Description](#description)

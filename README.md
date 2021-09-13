@@ -1,4 +1,4 @@
-![Argon](images/logo.png)
+![](images/logo.png)
 
 ### Table of contents
 - [Description](#description)

@@ -154,6 +154,23 @@ public class Gradient {
         return blend(color1, color2, p, 255);
     }
 
+
+    /**
+     * Factors the color's brightness proportionally.
+     * @param rgb rgb integer
+     * @param p percentage
+     * @return rgb integer
+     */
+    public static int factor(int rgb, double p) {
+        p = Calc.clamp(p, 0, 1);
+        int rgbOut = 0;
+        rgbOut |= ((rgb >> 24) & 0xFF) << 24;
+        rgbOut |= ((int) (((rgb >> 16) & 0xFF) * p)) << 16;
+        rgbOut |= ((int) (((rgb >> 8) & 0xFF) * p)) << 8;
+        rgbOut |= (int) ((rgb & 0xFF) * p);
+        return rgbOut;
+    }
+
     /**
      * Factors the color's brightness proportionally.
      * @param color color
@@ -171,6 +188,25 @@ public class Gradient {
 
     /**
      * Adds two colors.
+     * @param rgb1 color
+     * @param rgb2 color
+     * @return rgb integer
+     */
+    public static int add(int rgb1, int rgb2) {
+        int alpha = ((rgb1>>24)&0xFF) + ((rgb2>>24)&0xFF);
+        int r = ((rgb1>>16)&0xFF) + ((rgb2>>16)&0xFF);
+        int g = ((rgb1>>8)&0xFF) + ((rgb2>>8)&0xFF);
+        int b = (rgb1&0xFF) + (rgb2&0xFF);
+        int rgb = 0;
+        rgb |= Math.min(alpha, 255) << 24;
+        rgb |= Math.min(r, 255) << 16;
+        rgb |= Math.min(g, 255) << 8;
+        rgb |= Math.min(b, 255);
+        return rgb;
+    }
+
+    /**
+     * Adds two colors.
      * @param c1 color
      * @param c2 color
      * @return {@link Color}
@@ -181,6 +217,26 @@ public class Gradient {
                 Math.min(c1.getRed() + c2.getRed(), 255),
                 Math.min(c1.getGreen() + c2.getGreen(), 255),
                 Math.min(c1.getBlue() + c2.getBlue(), 255));
+    }
+
+    /**
+     * Adds two colors and scales the resulting color to fit in range [0-255].
+     * @param rgb1 color
+     * @param rgb2 color
+     * @return rgb integer
+     */
+    public static int addScaled(int rgb1, int rgb2) {
+        int alpha = ((rgb1>>24)&0xFF) + ((rgb2>>24)&0xFF);
+        int r = ((rgb1>>16)&0xFF) + ((rgb2>>16)&0xFF);
+        int g = ((rgb1>>8)&0xFF) + ((rgb2>>8)&0xFF);
+        int b = (rgb1&0xFF) + (rgb2&0xFF);
+        int max = Math.max(Math.max(r, g), b);
+        int rgb = 0;
+        rgb |= ((255 * alpha) / max) << 24;
+        rgb |= ((255 * r) / max) << 16;
+        rgb |= ((255 * g) / max) << 8;
+        rgb |= ((255 * b) / max);
+        return rgb;
     }
 
     /**
@@ -201,22 +257,11 @@ public class Gradient {
                 (255 * b) / max);
     }
 
-    /**
-     * Subtracts two colors.
-     * @param c1 color
-     * @param c2 color
-     * @return {@link Color}
-     * @see Color
-     */
-    public static Color sub(Color c1, Color c2) {
-        return new Color(
-                Math.min(c1.getRed(), c2.getRed()),
-                Math.min(c1.getGreen(), c2.getGreen()),
-                Math.min(c1.getBlue(), c2.getBlue()));
-    }
-
     @Deprecated
     public static Color illuminate(Color object, Color light) {
-        return sub(light, object);
+        return new Color(
+                Math.min(light.getRed(), object.getRed()),
+                Math.min(light.getGreen(), object.getGreen()),
+                Math.min(light.getBlue(), object.getBlue()));
     }
 }

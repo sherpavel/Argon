@@ -26,7 +26,8 @@ public class Util {
         g = Calc.clamp(g, 0, 255);
         b = Calc.clamp(b, 0, 255);
         alpha = Calc.clamp(alpha, 0, 255);
-        int rgb = alpha << 24;
+        int rgb = 0;
+        rgb |= alpha << 24;
         rgb |= r << 16;
         rgb |= g << 8;
         rgb |= b;

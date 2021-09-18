@@ -39,7 +39,7 @@ public class Layer {
         g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
+//        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
         g.setBackground(new Color(0, 0, 0, 0));
 
         // Accessing raster directly is by far the fastest way of interacting with image on pixel-by-pixel basis
@@ -268,6 +268,25 @@ public class Layer {
      */
     public void setValue(int x, int y, int value) {
         setValue(x, y, value, getAlpha(x, y));
+    }
+
+    /**
+     * Sets color at given coordinate.
+     * No error will be thrown for out-of-bound coordinate.
+     * @param x coordinate
+     * @param y coordinate
+     * @param color {@link Color}
+     * @see Color
+     */
+    public void setColor(int x, int y, Color color) {
+        if (x < 0 || x >= width || y < 0 || y >= height)
+            return;
+        int rgb = 0;
+        rgb |= color.getAlpha() << 24;
+        rgb |= color.getRed() << 16;
+        rgb |= color.getGreen() << 8;
+        rgb |= color.getBlue();
+        raster[x+width*y] = rgb;
     }
 
     // Misc

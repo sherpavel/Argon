@@ -23,7 +23,7 @@ public class Renderer {
         renderGraphics = renderImage.createGraphics();
         renderGraphics.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
         renderGraphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        renderGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
+//        renderGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
         renderGraphics.setBackground(new Color(0, 0, 0, 0));
 
         rendererRaster = ((DataBufferInt) renderImage.getRaster().getDataBuffer()).getData();

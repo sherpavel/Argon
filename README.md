@@ -73,7 +73,7 @@ argon.addClock("Update", () -> {
 Argon ensures that each second first clock will run exactly 60 times and second - 90. The behavior in-between is similar to that of running functions in separate threads (in perfect parallel), except it is executed in one.
 
 ### What if a function is slow?
-If either of the functions slow down below their maximum time threshold, Argon will reduce every clock proportionally. From the previous example, the first clock's maximum execution time is 16.7ms and second's - 11.1ms. Now let's say first clock's real execution time is 25ms (40 UPS) - a reduction of 33.3%. Therefore, every other clock's frequency is also reduced by 33.3% to preserve relative updaterate. In the UI clocks panel is it will look like this:  
+If either of the functions slow down below their maximum time threshold, Argon will reduce every clock proportionally. From the previous example, the first clock's maximum execution time is 16.7ms and update's - 11.1ms. Now let's say first clock's real execution time is 25ms (40 UPS) - a reduction of 33.3%. Therefore, every other clock's frequency is also reduced by 33.3% to preserve relative updaterate. In the UI clocks panel is it will look like this:  
 Draw > 40 calls  
 Update > 60 calls
 
@@ -89,7 +89,7 @@ There is no one canvas to draw on, but rather drawing is done in layers. Once cr
 ```
 Layer layer = argon.createLayer();
 ```
-> Layer are stored sequentially, meaning the first created layer will be the top layer.
+> Layers are stored sequentially, meaning the first created layer will be the bottom layer.
 
 Layer allows you to access to individual pixels via the provided methods or pixel raster, the backbone `BufferedImage` and `Graphics2D` for more complex shapes and draw operations.
 ```
